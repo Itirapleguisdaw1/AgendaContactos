@@ -11,9 +11,9 @@ public class Personal extends Contacto {
 LocalDate fecha;
 private static String firma;
 Relacion relacion;
-	public Personal(String nombre, String apellidos, String telefono,String email,LocalDate fecha,Relacion rel) {
+	public Personal(String nombre, String apellidos, String telefono,String email,String fecha,Relacion rel) {
 		super(nombre,apellidos,telefono,email);
-		this.fecha = fecha;
+		this.fecha = LocalDate.parse(fecha);
 		relacion = rel;
 	}
 	public LocalDate getFecha() {
