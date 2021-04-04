@@ -62,7 +62,7 @@ public class Profesional extends Contacto{
 	}
 
 	/**
-	 * Representación textual de la clase Profesional
+	 * Representación textual de la clase Profesional 
 	 */
 	@Override
 	public String toString() {
