@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class TestProfesionalPersonal {
 
@@ -89,7 +90,7 @@ public class TestProfesionalPersonal {
 	private static void mostrarFirmaEmail(Contacto contacto) {
 		System.out.println("Mostrando la firma del email del contacto ...");
 		System.out.println(contacto);
-		System.out.println(contacto.getFirmaEmail());
+		System.out.println(contacto.crearFirma());
 
 	}
 

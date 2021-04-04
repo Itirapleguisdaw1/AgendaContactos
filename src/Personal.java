@@ -1,4 +1,5 @@
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -13,7 +14,7 @@ private static String firma;
 Relacion relacion;
 	public Personal(String nombre, String apellidos, String telefono,String email,String fecha,Relacion rel) {
 		super(nombre,apellidos,telefono,email);
-		this.fecha = LocalDate.parse(fecha);
+		this.fecha = LocalDate.parse(fecha,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		relacion = rel;
 	}
 	public LocalDate getFecha() {
@@ -79,7 +80,7 @@ Relacion relacion;
 	}
 	public String toString() {
 		String resul = "";
-		resul = super.toString() + "\n" + "Fecha nacimiento: " +  formatearFecha() + "\n" +"Relacion: " + relacion + "\n\n" + crearFirma();
+		resul = super.toString() + "Fecha nacimiento: " +  formatearFecha() + "\n" +"Relacion: " + relacion + "\n\n" + crearFirma();
 		return resul;
 	}
 }
