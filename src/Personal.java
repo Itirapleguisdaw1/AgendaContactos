@@ -17,24 +17,46 @@ Relacion relacion;
 		this.fecha = LocalDate.parse(fecha,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		relacion = rel;
 	}
+	/**
+	 * Metodo accesor que devuelve el nombre de la empresa
+	 * @return Devuelve un LocalDate con la fecha de nacimiento
+	 */
 	public LocalDate getFecha() {
 		return fecha;
 	}
+	/**
+	 * Método mutador para cambiar la fecha de nacimiento
+	 * @param Se introduce como parámetro la nueva fecha de nacimiento
+	 */
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+	/**
+	 * Metodo accesor que devuelve la relacion
+	 * @return Devuelve una Realcion con la relacion del contacto Personal
+	 */
 	public Relacion getRelacion() {
 		return relacion;
 	}
+	/**
+	 * Método mutador para cambiar la relacion
+	 * @param Se introduce como parámetro la nueva relacion
+	 */
 	public void setRelacion(Relacion relacion) {
 		this.relacion = relacion;
 	}
-	
+	/**
+	 * Método que nos saca la firma al final de cada contacto
+	 * @return Devuelve un string con la firma
+	 */
 	public String crearFirma() {
 		firma = "Un abrazo!";
 		return firma;
 	}
-	
+	/**
+	 * Método para saber si es cumpleaños de alguien comparando la fecha de nacimiento con la actual.
+	 * @return Devuelve un booleano si es o no su cumpleaños
+	 */
 	public boolean esCumpleaños() {
 		LocalDate hoy = LocalDate.now();
 		boolean resultado = false;
@@ -43,7 +65,10 @@ Relacion relacion;
 		}
 		return resultado;
 	}
-	
+	/**
+	 * Método para sacar la fecha en el formato que se pide ("dd/MM/yyyy")
+	 * @return Devuelve un String con la fecha formateada
+	 */
 	private String formatearFecha() {
 		String formateada = "";
 		String mes = "";
@@ -78,6 +103,9 @@ Relacion relacion;
 		formateada = dia + " " + mes + " " + año;
 		return formateada;
 	}
+	/**
+	 * Representación textual de la clase Personal
+	 */
 	public String toString() {
 		String resul = "";
 		resul = super.toString() + "Fecha nacimiento: " +  formatearFecha() + "\n" +"Relacion: " + relacion + "\n\n" + crearFirma();
