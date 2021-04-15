@@ -62,8 +62,20 @@ public class AgendaContactos {
 	}
 
 	public List<Contacto> buscarContactos(String texto) {
-
-		return null;
+		List<Contacto> salida = new ArrayList();
+		Set<Contacto> posicion= new TreeSet();
+		Set<Map.Entry<Character,Set<Contacto>>> evento = agenda.entrySet();
+        Iterator<Map.Entry<Character,Set<Contacto>>> it = evento.iterator();
+        while(it.hasNext()) {
+        	Map.Entry<Character,Set<Contacto>> entrada = it.next();	
+        	posicion = entrada.getValue();
+        	for(Contacto contacto : posicion) {
+        		if(contacto.getNombre().contains(texto)||contacto.getApellidos().contains(texto)){
+        			salida.add(contacto);
+        		}
+        	}
+        }
+		return salida;
 
 	}
 
