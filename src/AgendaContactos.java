@@ -151,7 +151,7 @@ public class AgendaContactos {
         				}else {
         					if(cambio.containsKey(relacion)) {
         						si = cambio.get(relacion);
-        						si.add(cadena);
+        						si.add(cadena); 
         						cambio.put(relacion, si);
         					}
         				}      				
