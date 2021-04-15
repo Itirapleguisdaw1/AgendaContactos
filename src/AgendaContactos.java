@@ -24,17 +24,14 @@ public class AgendaContactos {
 		}
 
 	}
-	public void contactosEnLetra(Character letra) {
-		Set<Contacto> personas = new TreeSet();	
-		Set<Map.Entry<Character,Set<Contacto>>> evento = agenda.entrySet();
-        Iterator<Map.Entry<Character,Set<Contacto>>> it = evento.iterator();
-        while(it.hasNext()) {
-        	Map.Entry<Character,Set<Contacto>> entrada = it.next();	
-        	if(entrada.getKey().equals(letra)) {
-        		personas.addAll(entrada.getValue());
-        	}
-        }
-        System.out.println(personas);
+	public int contactosEnLetra(char letra) {
+		int contador = 0;
+		for(Character key:agenda.keySet()) {
+			if(key.equals(letra)) {
+				contador = agenda.get(key).size();
+			}
+		}
+		return contador;
 	}
 
 	public void totalContactos() {
