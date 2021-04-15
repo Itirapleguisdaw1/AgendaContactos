@@ -163,10 +163,11 @@ public class AgendaContactos {
 		
 	}
 
-	public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
-
-		return null;
-
+	public List<Personal> personalesOrdenadosPorFechaNacimiento(Character letra) {
+		List<Personal> orden = new ArrayList<Personal>();
+		orden = personalesEnLetra(letra);
+		Collections.sort(orden);
+		return orden;
 	}
 
 }
