@@ -9,8 +9,9 @@ public class AgendaContactos {
 		agenda = new TreeMap();
 	}
 
-	public void añadirContacto(Character inicial,Contacto persona) {
+	public void añadirContacto(Contacto persona) {
 		Set<Contacto> posicion = new TreeSet();
+		char inicial = persona.getApellidos().charAt(0);
 		if(agenda.isEmpty()){
 			posicion.add(persona);
 			agenda.put(inicial, posicion);
@@ -50,7 +51,17 @@ public class AgendaContactos {
 	@Override
 	public String toString() {
 
-		return null;
+		String salida = "";
+		salida += "AGENDA DE CONTACTOS\n";
+		String sinCorchetes = "";
+		for(Character key:agenda.keySet()) {
+			//Bucle para quitar los corchetes de cada clave del Map
+			for(Set<Contacto> cons:agenda.values()) {
+				sinCorchetes += cons.toString() + "\n";
+			}
+			salida += key + "(" + contactosEnLetra(key) + ")\n---------------" + sinCorchetes + "\n";
+		}
+		return salida;
 	}
 
 	public List<Contacto> buscarContactos(String texto) {
