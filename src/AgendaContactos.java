@@ -10,21 +10,21 @@ public class AgendaContactos {
 	}
 
 	public void añadirContacto(Contacto con) {
-		this.contactos = new TreeSet<Contacto>();
-		char c = con.getPrimeraLetra();
+		contactos = new TreeSet();
+		char inicial = con.getPrimeraLetra();
 		if(agenda.isEmpty()) {
 			contactos.add(con);
-			agenda.put(c, contactos);
-		} else {
-			for(Contacto cons:contactos) {
-				if(cons.equals(con)) {
-					System.out.println("Contacto repetido");
-				} else {
-					this.contactos = agenda.get(c);
-					contactos.add(con);
-					agenda.put(c, contactos);
-				}
-			}
+			agenda.put(inicial, contactos);
+		}else {
+			if(agenda.containsKey(inicial)){
+				contactos.clear();;
+				contactos = agenda.get(inicial);
+				contactos.add(con);
+				agenda.put(inicial, contactos);
+			}else {
+				contactos.clear();
+				contactos.add(con);
+			agenda.put(inicial, contactos);}
 		}
 
 	}
@@ -51,18 +51,16 @@ public class AgendaContactos {
 
 	@Override
 	public String toString() {
-
-		String salida = ""; 
-		salida += "AGENDA DE CONTACTOS\n";
-		String sinCorchetes = "";
-		for(Character key:agenda.keySet()) {
-			//Bucle para quitar los corchetes de cada clave del Map
-			for(Set<Contacto> cons:agenda.values()) {
-				sinCorchetes += cons.toString() + "\n";
-			}
-			salida += key + "(" + contactosEnLetra(key) + ")\n---------------" + sinCorchetes + "\n";
-		}
-		return salida;
+		
+		String salida ="";
+		Set<Map.Entry<Character,Set<Contacto>>> evento = agenda.entrySet();
+        Iterator<Map.Entry<Character,Set<Contacto>>> it = evento.iterator();
+        while(it.hasNext()) {
+        	Map.Entry<Character,Set<Contacto>> entrada = it.next();	
+        	int num = entrada.getValue().size();
+        	salida = salida + entrada.getKey() +" ("+ num +") "+"\n"+ entrada.getValue() + "\n";
+        }
+        return salida;
 	}
 
 	public List<Contacto> buscarContactos(String texto) {
@@ -84,24 +82,29 @@ public class AgendaContactos {
 	}
 
 	public List<Personal> personalesEnLetra(char letra) {
+		char comp = Character.toUpperCase(letra);		
 		List<Personal> personales = new ArrayList();
+		Set<Contacto> contactos = new TreeSet();
 		Set<Map.Entry<Character,Set<Contacto>>> evento = agenda.entrySet();
         Iterator<Map.Entry<Character,Set<Contacto>>> it = evento.iterator();
-        while(it.hasNext()) {
+        for(int i=0;i<agenda.size();i++) {
         	Map.Entry<Character,Set<Contacto>> entrada = it.next();	
-        	if(entrada.getKey().equals(letra)) {
-        		Set<Contacto> posicion= new TreeSet();
-        		posicion = entrada.getValue();
-        		Iterator<Contacto> iit = posicion.iterator();
+        	if(entrada.getKey().equals(comp)) {
+        		contactos = agenda.get(comp);
+        		Iterator<Contacto> iit = contactos.iterator();
         		while(iit.hasNext()) {
-        			Contacto salida = iit.next();
-        			if(salida instanceof Personal) {
-        				Personal p = (Personal) salida;
-        				personales.add(p);
+        			Contacto contacto = iit.next();
+        			if(contacto instanceof Personal) {
+        				Personal si = (Personal) contacto;
+        				personales.add(si);
         			}
         		}
+        		
         	}
         }
+
+
+	
         return personales;
 	}
 
@@ -133,35 +136,37 @@ public class AgendaContactos {
 
 	public Map<Relacion,List<String>> personalesPorRelacion() {
 		Set<Contacto> posicion= new TreeSet();
-		ArrayList<String> valor = new ArrayList();
 		TreeMap<Relacion, List<String>> cambio  = new TreeMap();
 		Set<Map.Entry<Character,Set<Contacto>>> evento = agenda.entrySet();
         Iterator<Map.Entry<Character,Set<Contacto>>> it = evento.iterator();
         while(it.hasNext()) {
         	Map.Entry<Character,Set<Contacto>> entrada = it.next();	
         	posicion = entrada.getValue();
-        	for(int i = 0; i<posicion.size();i++) {
         		Iterator<Contacto> iit = posicion.iterator();
         		while(iit.hasNext()) {
         			Contacto salida = iit.next();
         			if(salida instanceof Personal) {
-        				List<String> si = new ArrayList();
+        				List<String> valor = new ArrayList();
         				Personal p = (Personal) salida;
         				String cadena = p.getNombre() + " " +p.getApellidos();;
         				Relacion relacion = p.getRelacion();
+        				valor = new ArrayList();;
         				if(cambio.isEmpty()) {
-        				valor.add(cadena);
-        				cambio.put(relacion, valor);       				
+        					valor.add(cadena);
+        					cambio.put(relacion, valor);
         				}else {
-        					if(cambio.containsKey(relacion)) {
-        						si = cambio.get(relacion);
-        						si.add(cadena); 
-        						cambio.put(relacion, si);
-        					}
-        				}      				
+        					if(cambio.containsKey(relacion)){
+        						valor.clear();;
+        						valor = cambio.get(relacion);
+        						valor.add(cadena);
+        						cambio.put(relacion, valor);
+        					}else {
+        						valor.clear();
+        						valor.add(cadena);
+        					cambio.put(relacion, valor);}
         				}
-        			}
-        	}
+        				}
+        			}       	
         }
         return cambio;
 		
@@ -175,5 +180,3 @@ public class AgendaContactos {
 	}
 
 }
-
-

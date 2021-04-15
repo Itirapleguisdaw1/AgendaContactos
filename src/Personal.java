@@ -108,7 +108,7 @@ Relacion relacion;
 	 */
 	public String toString() {
 		String resul = "";
-		resul = super.toString() + "Fecha nacimiento: " +  formatearFecha() + "\n" +"Relacion: " + relacion + "\n\n" + crearFirma();
+		resul = super.toString() + "Fecha nacimiento: " +  formatearFecha() + "\n" +"Relacion: " + relacion + "\n\n" + crearFirma()+"\n";
 		return resul;
 	}
 	

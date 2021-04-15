@@ -1,4 +1,5 @@
 
+
 /**
  * Utilidades para cargar la agenda 
  */
@@ -34,7 +35,7 @@ public class AgendaIO {
         }
         if(numero == 2) {
             separacion[6].toUpperCase();
-            switch(separacion[6]) {
+            switch(separacion[6].toUpperCase()) {
             case "PADRE":
                 relac = relac.PADRE;
                 break;
@@ -95,3 +96,4 @@ public class AgendaIO {
 	}
 
 }
+
