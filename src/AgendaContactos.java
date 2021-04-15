@@ -48,7 +48,7 @@ public class AgendaContactos {
 	@Override
 	public String toString() {
 
-		String salida = "";
+		String salida = ""; 
 		salida += "AGENDA DE CONTACTOS\n";
 		String sinCorchetes = "";
 		for(Character key:agenda.keySet()) {
