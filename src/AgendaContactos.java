@@ -10,7 +10,7 @@ public class AgendaContactos {
 	}
 
 	public void añadirContacto(Contacto persona) {
-		Set<Contacto> posicion = new TreeSet();
+		Set<Contacto> posicion = new TreeSet(); 
 		char inicial = persona.getPrimeraLetra();
 		if(agenda.isEmpty()){
 			posicion.add(persona);
