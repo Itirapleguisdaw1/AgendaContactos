@@ -19,8 +19,8 @@ public class TestAgenda {
 		felicitar(agenda);
 		separador();
 
-		/*personalesOrdenadosPorFecha(agenda, 'm');
-		separador();*/
+		personalesOrdenadosPorFecha(agenda, 'm');
+		separador();
 		personalesOrdenadosPorFecha(agenda, 'e');
 		separador();
 		personalesOrdenadosPorFecha(agenda, 'w');

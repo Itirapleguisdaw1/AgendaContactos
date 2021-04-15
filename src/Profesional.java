@@ -69,11 +69,11 @@ public class Profesional extends Contacto implements Comparable<Contacto>{
 		return super.toString() + "Empresa: " + empresa + "\n" + crearFirma() + "\n";
 	}
 	
-	public int compareTo(Profesional p1, Profesional p2) {
-		if(p1.getApellidos().compareTo(p2.getApellidos()) < 1) {
+	public int compareTo(Profesional p1) {
+		if(this.getApellidos().compareTo(p1.getApellidos()) < 1) {
 			return -1;
 		}
-		if(p1.getApellidos().compareTo(p2.getApellidos()) > 1) {
+		if(this.getApellidos().compareTo(p1.getApellidos()) > 1) {
 			return 1;
 		}
 		return 0;
