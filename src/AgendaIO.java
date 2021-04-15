@@ -1,6 +1,6 @@
 
 /**
- * Utilidades para cargar la agenda
+ * Utilidades para cargar la agenda 
  */
 public class AgendaIO {
 	
