@@ -3,7 +3,7 @@
  * @author Unai Pérez, Iñaki Tiraplegui, Enrique Lafraya.
  *
  */
-public class Profesional extends Contacto{
+public class Profesional extends Contacto implements Comparable<Contacto>{
 
 	private String empresa;
 	public Profesional(String nombre, String apellidos, String telefono, String email,String empresa) {
@@ -67,6 +67,16 @@ public class Profesional extends Contacto{
 	@Override
 	public String toString() {
 		return super.toString() + "Empresa: " + empresa + "\n" + crearFirma() + "\n";
+	}
+	
+	public int compareTo(Profesional p1, Profesional p2) {
+		if(p1.getApellidos().compareTo(p2.getApellidos()) < 1) {
+			return -1;
+		}
+		if(p1.getApellidos().compareTo(p2.getApellidos()) > 1) {
+			return 1;
+		}
+		return 0;
 	}
 
 }
