@@ -4,22 +4,26 @@ import java.util.*;
  * */
 public class AgendaContactos {
 	private Map<Character, Set<Contacto>> agenda;
-
+	private Set<Contacto> contactos;
 	public AgendaContactos() {
-		agenda = new TreeMap();
+		agenda = new TreeMap<Character, Set<Contacto>>();
 	}
 
-	public void añadirContacto(Contacto persona) {
-		Set<Contacto> posicion = new TreeSet(); 
-		char inicial = persona.getPrimeraLetra();
-		if(agenda.isEmpty()){
-			posicion.add(persona);
-			agenda.put(inicial, posicion);
-		}else {
-			if(agenda.containsKey(inicial)) {
-				posicion = agenda.get(inicial);
-				posicion.add(persona);
-				agenda.put(inicial, posicion);
+	public void añadirContacto(Contacto con) {
+		this.contactos = new TreeSet<Contacto>();
+		char c = con.getPrimeraLetra();
+		if(agenda.isEmpty()) {
+			contactos.add(con);
+			agenda.put(c, contactos);
+		} else {
+			for(Contacto cons:contactos) {
+				if(cons.equals(con)) {
+					System.out.println("Contacto repetido");
+				} else {
+					this.contactos = agenda.get(c);
+					contactos.add(con);
+					agenda.put(c, contactos);
+				}
 			}
 		}
 
