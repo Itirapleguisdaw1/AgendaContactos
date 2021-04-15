@@ -3,51 +3,59 @@
  * Utilidades para cargar la agenda
  */
 public class AgendaIO {
-
+	
 	public static void importar(AgendaContactos agenda) {
-		obtenerLineasDatos();
+		String[] tempo = obtenerLineasDatos();
+		for(int i = 0; i < tempo.length; i++) {
+			agenda.añadirContacto(parsearLinea(tempo[0]));
+		}
 	}
 
 	private static Contacto parsearLinea(String linea) {
 		
 		String[] separacion = linea.split(",");
-		for(int i = 0; i < separacion.length -1 ; i++) {
-			separacion[i].trim();
+		for(int i = 0; i < separacion.length ; i++) {
+			separacion[i] = separacion[i].trim();
 		}
+		
 		String nombre = separacion[1];
 		String apellidos = separacion[2];
 		String telefono = separacion[3];
 		String email = separacion[4];
 		String tempo1 = separacion[5];
 		Relacion relac = Relacion.HIJO;
+		Contacto c = null;
+		
 		if(separacion[0] == "1"){
 			Profesional tempo = new Profesional(nombre, apellidos, telefono, email, tempo1); 
-			return tempo;
+			c = (Contacto)tempo;
 		}
 		if(separacion[0] == "2") {
+			separacion[6].toUpperCase();
 			switch(separacion[6]) {
-			case "padre":
+			case "PADRE":
 				relac = relac.PADRE;
 				break;
-			case "madre":
+			case "MADRE":
 				relac = relac.MADRE;
 				break;
-			case "amigos":
+			case "AMIGOS":
 				relac = relac.AMIGOS;
 				break;
-			case "hijo":
+			case "HIJO":
 				relac = relac.HIJO;
 				break;
-			case "hija":
+			case "HIJA":
 				relac = relac.HIJA;
 				break;
-			case "":
-				relac = relac.PADRE;
+			case "PAREJA":
+				relac = relac.PAREJA;
 				break;
 			}
-			Personal tempo = new Personal(nombre, apellidos, telefono, email, tempo1, relac);
-			return tempo;
+			Contacto tempo = new Personal(nombre, apellidos, telefono, email, tempo1, relac);
+			c = (Contacto)tempo;
 		}
+		return c;
 	}
 
 	/**
